@@ -11,7 +11,7 @@
         <h1 class="text-3xl font-bold mb-6 text-center text-blue-600">My Item List</h1>
         <div class="flex space-x-4 mb-6">
             <input type="text" id="itemInput" placeholder="Enter an item" class="flex-grow px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
-            <button onclick="addItem()" class="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">Add</button>
+            <button onclick="addItem()" class="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200">Add</button>
         </div>
         <ul id="itemList" class="space-y-4 text-lg"></ul>
     </div>
@@ -23,7 +23,7 @@
             if (input.value.trim() !== '') {
                 const li = document.createElement('li');
                 li.textContent = input.value;
-                li.classList.add('bg-blue-50', 'px-4', 'py-2', 'rounded-lg');
+                li.classList.add('bg-blue-50', 'px-4', 'py-2', 'rounded-lg', 'hover:bg-blue-100', 'transition', 'duration-200');
                 list.appendChild(li);
                 input.value = '';
             }
@@ -31,6 +31,5 @@
             input.focus();
         }
     </script>
-
 </body>
 </html>
