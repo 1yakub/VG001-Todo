@@ -3,9 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elegant Todo List</title>
+    <title>Documented Todo List</title>
+    <!-- 
+        Tailwind CSS via CDN
+        Pros: Quick setup, no build process needed
+        Cons: Larger file size in production, no custom configuration
+        Alternative: Could use npm install tailwindcss for production
+    -->
     <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
+        /* 
+        ANIMATION STYLING
+        - Using keyframes for continuous background gradient movement
+        - 15s duration provides smooth, subtle movement
+        - ease timing function ensures smooth transitions
+        */
         .animate-gradient {
             background-size: 200% 200%;
             animation: gradient 15s ease infinite;
@@ -15,32 +28,89 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+
+        /* 
+        GLASSMORPHISM EFFECTS
+        Three levels of glass effect for visual hierarchy:
+        1. Main container (glassy) - Most transparent
+        2. Interactive elements (glassy-dark) - Medium opacity
+        3. Input field (input-glassy) - Most opaque for readability
+        */
         .glassy {
+            /* 25% white background for subtle transparency */
             background: rgba(255, 255, 255, 0.25);
+            /* 12px blur creates the frosted glass effect */
             backdrop-filter: blur(12px);
+            /* Subtle white border adds depth */
             border: 1px solid rgba(255, 255, 255, 0.4);
+            /* Layered shadow for depth perception */
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
         }
+
         .glassy-dark {
+            /* Using blue tint for cohesive design */
             background: rgba(59, 130, 246, 0.15);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
         }
+
         .input-glassy {
+            /* Higher opacity background for better text contrast */
             background: rgba(255, 255, 255, 0.4);
+            /* Less blur for distinction from other elements */
             backdrop-filter: blur(4px);
             border: 1px solid rgba(255, 255, 255, 0.5);
         }
     </style>
 </head>
+
+<!-- 
+BODY STRUCTURE
+- Flex container for vertical centering
+- Min-height ensures full viewport coverage
+- Animated gradient background for visual interest
+- Color scheme: Light blues for calm, professional appearance
+-->
 <body class="flex flex-col items-center justify-center min-h-screen animate-gradient bg-gradient-to-br from-blue-300 via-blue-200 to-sky-200">
+    <!-- 
+    MAIN CONTAINER
+    - Width: 96 (24rem) provides good readability
+    - Padding: 8 (2rem) for comfortable spacing
+    - Shadow and rounded corners for modern look
+    -->
     <div class="glassy p-8 rounded-2xl shadow-2xl w-96 max-w-full mx-4">
+        <!-- 
+        HEADER
+        - text-4xl: Large, prominent title
+        - blue-800: Dark enough for contrast, matches theme 
+        -->
         <h1 class="text-4xl font-bold mb-8 text-center text-blue-800">My Todo List</h1>
+
+        <!-- 
+        INPUT SECTION
+        - Flex container for input and button alignment
+        - Space-x-4 provides consistent spacing
+        -->
         <div class="flex space-x-4 mb-8">
-            <input type="text" id="itemInput" placeholder="Add new task..." 
+            <!-- 
+            INPUT FIELD
+            - flex-grow allows input to take available space
+            - Comprehensive focus states for accessibility
+            - Color-matched placeholder for design consistency
+            -->
+            <input type="text" 
+                id="itemInput" 
+                placeholder="Add new task..." 
                 class="flex-grow px-4 py-3 input-glassy rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 
                 text-blue-900 placeholder-blue-400 text-lg shadow-inner">
+
+            <!-- 
+            ADD BUTTON
+            - Solid background for visual prominence
+            - Interactive states: hover, focus, active
+            - Scale effect on click for feedback
+            -->
             <button onclick="addItem()" 
                 class="px-6 py-3 bg-blue-500 text-white font-semibold rounded-xl hover:bg-blue-600 
                 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-300 
@@ -48,15 +118,32 @@
                 Add
             </button>
         </div>
+
+        <!-- 
+        LIST CONTAINER
+        - Space-y-3 provides consistent vertical spacing between items
+        -->
         <ul id="itemList" class="space-y-3"></ul>
     </div>
 
     <script>
+        /**
+         * Adds a new item to the todo list
+         * Includes:
+         * - Input validation
+         * - Element creation
+         * - Styling application
+         * - Animation handling
+         * - Event listener attachment
+         */
         function addItem() {
+            // Get DOM elements
             const input = document.getElementById('itemInput');
             const list = document.getElementById('itemList');
             
+            // Validate input (prevent empty items)
             if (input.value.trim() !== '') {
+                // Create list item with styling
                 const li = document.createElement('li');
                 li.classList.add(
                     'glassy-dark',
@@ -74,48 +161,59 @@
                     'font-medium'
                 );
                 
-                // Create a div for the item content
+                // Create container for flexible layout
                 const itemContent = document.createElement('div');
                 itemContent.className = 'flex justify-between items-center';
                 
-                // Add text content
+                // Create and style text content
                 const textSpan = document.createElement('span');
                 textSpan.textContent = input.value;
                 
-                // Add delete button
+                // Create and configure delete button
                 const deleteBtn = document.createElement('button');
-                deleteBtn.innerHTML = '×';
+                deleteBtn.innerHTML = '×'; // Using × symbol for delete
                 deleteBtn.className = 'ml-2 text-blue-600 hover:text-red-500 text-xl font-bold transition duration-300';
+                
+                // Add delete functionality with animation
                 deleteBtn.onclick = (e) => {
-                    e.stopPropagation();
+                    e.stopPropagation(); // Prevent event bubbling
+                    // Apply exit animation
                     li.classList.add('opacity-0', 'scale-95');
+                    // Remove after animation completes
                     setTimeout(() => li.remove(), 300);
                 };
                 
-                // Assemble the item
+                // Assemble the item components
                 itemContent.appendChild(textSpan);
                 itemContent.appendChild(deleteBtn);
                 li.appendChild(itemContent);
                 
-                // Add with animation
+                // Set up entrance animation initial state
                 li.style.opacity = '0';
                 li.style.transform = 'translateY(10px)';
+                
+                // Add to list (prepend for better UX)
                 list.insertBefore(li, list.firstChild);
                 
-                // Trigger animation
+                // Trigger entrance animation
                 setTimeout(() => {
                     li.style.transition = 'all 0.3s ease';
                     li.style.opacity = '1';
                     li.style.transform = 'translateY(0)';
                 }, 50);
                 
+                // Reset input field
                 input.value = '';
             }
             
+            // Return focus to input for better UX
             input.focus();
         }
         
-        // Add keyboard support
+        /**
+         * Add keyboard support for better accessibility
+         * Allows users to submit using Enter key
+         */
         document.getElementById('itemInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 addItem();
