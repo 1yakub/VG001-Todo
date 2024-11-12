@@ -5,42 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Items to List</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 40px auto;
-            padding: 20px;
-        }
-        .input-container {
-            margin-bottom: 20px;
-        }
-        input {
-            padding: 8px;
-            margin-right: 10px;
-        }
-        button {
-            padding: 8px 16px;
-            background-color: #0070f3;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0051b3;
-        }
-        ul {
-            padding-left: 20px;
-        }
-        li {
-            margin: 8px 0;
-        }
+     
     </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="input-container">
-        <input type="text" id="itemInput" placeholder="Enter item">
-        <button onclick="addItem()">Add Item</button>
+<body class=" flex flex-col  items-center justify-center w-full h-screen bg-blue-50">
+    <div class="">
+        <input type="text" id="itemInput" placeholder="Enter item"
+        class=" px-3 py-3 border-2 border-blue-200 rounded-full"
+        >
+        <button onclick="addItem()"
+        class="px-3 py-2 border-2 border-blue-100 rounded text-blue-600"
+        >Add </button>
     </div>
     <ul id="itemList"></ul>
 
