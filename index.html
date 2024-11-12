@@ -3,33 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Items to List</title>
+    <title>Elegant Todo List</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .animate-gradient {
+            background-size: 200% 200%;
+            animation: gradient 15s ease infinite;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .glassy {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+        .glassy-dark {
+            background: rgba(59, 130, 246, 0.15);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+        .input-glassy {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+    </style>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 to-blue-200">
-    <div class="bg-white p-8 rounded-lg shadow-lg">
-        <h1 class="text-3xl font-bold mb-6 text-center text-blue-600">My Item List</h1>
-        <div class="flex space-x-4 mb-6">
-            <input type="text" id="itemInput" placeholder="Enter an item" class="flex-grow px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
-            <button onclick="addItem()" class="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-200">Add</button>
+<body class="flex flex-col items-center justify-center min-h-screen animate-gradient bg-gradient-to-br from-blue-300 via-blue-200 to-sky-200">
+    <div class="glassy p-8 rounded-2xl shadow-2xl w-96 max-w-full mx-4">
+        <h1 class="text-4xl font-bold mb-8 text-center text-blue-800">My Todo List</h1>
+        <div class="flex space-x-4 mb-8">
+            <input type="text" id="itemInput" placeholder="Add new task..." 
+                class="flex-grow px-4 py-3 input-glassy rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 
+                text-blue-900 placeholder-blue-400 text-lg shadow-inner">
+            <button onclick="addItem()" 
+                class="px-6 py-3 bg-blue-500 text-white font-semibold rounded-xl hover:bg-blue-600 
+                focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-300 
+                shadow-lg hover:shadow-xl active:scale-95">
+                Add
+            </button>
         </div>
-        <ul id="itemList" class="space-y-4 text-lg"></ul>
+        <ul id="itemList" class="space-y-3"></ul>
     </div>
+
     <script>
         function addItem() {
             const input = document.getElementById('itemInput');
             const list = document.getElementById('itemList');
-    
+            
             if (input.value.trim() !== '') {
                 const li = document.createElement('li');
-                li.textContent = input.value;
-                li.classList.add('bg-blue-50', 'px-4', 'py-2', 'rounded-lg', 'hover:bg-blue-100', 'transition', 'duration-200');
-                list.appendChild(li);
+                li.classList.add(
+                    'glassy-dark',
+                    'px-4',
+                    'py-3',
+                    'rounded-xl',
+                    'text-blue-800',
+                    'hover:bg-blue-100/50',
+                    'transition',
+                    'duration-300',
+                    'cursor-pointer',
+                    'shadow-md',
+                    'hover:shadow-lg',
+                    'text-lg',
+                    'font-medium'
+                );
+                
+                // Create a div for the item content
+                const itemContent = document.createElement('div');
+                itemContent.className = 'flex justify-between items-center';
+                
+                // Add text content
+                const textSpan = document.createElement('span');
+                textSpan.textContent = input.value;
+                
+                // Add delete button
+                const deleteBtn = document.createElement('button');
+                deleteBtn.innerHTML = '×';
+                deleteBtn.className = 'ml-2 text-blue-600 hover:text-red-500 text-xl font-bold transition duration-300';
+                deleteBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    li.classList.add('opacity-0', 'scale-95');
+                    setTimeout(() => li.remove(), 300);
+                };
+                
+                // Assemble the item
+                itemContent.appendChild(textSpan);
+                itemContent.appendChild(deleteBtn);
+                li.appendChild(itemContent);
+                
+                // Add with animation
+                li.style.opacity = '0';
+                li.style.transform = 'translateY(10px)';
+                list.insertBefore(li, list.firstChild);
+                
+                // Trigger animation
+                setTimeout(() => {
+                    li.style.transition = 'all 0.3s ease';
+                    li.style.opacity = '1';
+                    li.style.transform = 'translateY(0)';
+                }, 50);
+                
                 input.value = '';
             }
-    
+            
             input.focus();
         }
+        
+        // Add keyboard support
+        document.getElementById('itemInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addItem();
+            }
+        });
     </script>
 </body>
 </html>
