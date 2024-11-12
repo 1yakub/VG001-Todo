@@ -4,44 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Items to List</title>
-    <style>
-     
-    </style>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class=" flex flex-col  items-center justify-center w-full h-screen bg-blue-50">
-    <div class="">
-        <input type="text" id="itemInput" placeholder="Enter item"
-        class=" px-3 py-3 border-2 border-blue-200 rounded-full"
-        >
-        <button onclick="addItem()"
-        class="px-3 py-2 border-2 border-blue-100 rounded text-blue-600"
-        >Add </button>
+<body class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 to-blue-200">
+    <div class="bg-white p-8 rounded-lg shadow-lg">
+        <h1 class="text-3xl font-bold mb-6 text-center text-blue-600">My Item List</h1>
+        <div class="flex space-x-4 mb-6">
+            <input type="text" id="itemInput" placeholder="Enter an item" class="flex-grow px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <button onclick="addItem()" class="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">Add</button>
+        </div>
+        <ul id="itemList" class="space-y-4 text-lg"></ul>
     </div>
-    <ul id="itemList"></ul>
-
     <script>
         function addItem() {
-            // Get the input element
             const input = document.getElementById('itemInput');
-            // Get the list element
             const list = document.getElementById('itemList');
-            
-            // Check if input is not empty
+    
             if (input.value.trim() !== '') {
-                // Create new li element
                 const li = document.createElement('li');
-                // Add text to li
                 li.textContent = input.value;
-                // Add li to ul
+                li.classList.add('bg-blue-50', 'px-4', 'py-2', 'rounded-lg');
                 list.appendChild(li);
-                // Clear input field
                 input.value = '';
             }
-            
-            // Focus back on input
+    
             input.focus();
         }
     </script>
+
 </body>
 </html>
