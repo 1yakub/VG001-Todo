@@ -30,3 +30,11 @@
     -webkit-backdrop-filter: blur(4px);
     border: 1px solid rgba(255, 255, 255, 0.5);
 }
+
+/* Footer glass effect */
+footer.glassy-dark {
+    background: rgba(59, 130, 246, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}

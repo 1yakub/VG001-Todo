@@ -52,3 +52,8 @@
     text-align: center;
     color: #1e40af;  /* text-blue-800 equivalent */
 }
+
+/* Add to your existing styles */
+body {
+    padding-bottom: 4rem; /* Space for fixed footer */
+}
