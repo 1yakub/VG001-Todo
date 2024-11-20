@@ -1,62 +1,32 @@
-/* animations.css */
+/* glassy.css */
 
 /*************************************************
- * ANIMATIONS
- * All animation keyframes and transition effects
+ * GLASSMORPHISM EFFECTS
+ * Specialized styling for glass-like UI elements
  *************************************************/
 
-/* Gradient animation */
-.animate-gradient {
-    background-size: 200% 200%;
-    animation: gradient 15s ease infinite;
+/* Main container glass effect */
+.glassy {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
 }
 
-@keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+/* Darker glass effect for interactive elements */
+.glassy-dark {
+    background: rgba(59, 130, 246, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
 }
 
-/* GitHub Corner animations */
-.github-corner:hover .octo-arm {
-    animation: octocat-wave 560ms ease-in-out;
-}
-
-@keyframes octocat-wave {
-    0%, 100% { transform: rotate(0); }
-    20%, 60% { transform: rotate(-25deg); }
-    40%, 80% { transform: rotate(10deg); }
-}
-
-/* Todo item animations */
-.todo-item-enter {
-    opacity: 0;
-    transform: translateY(10px);
-    transition: all 0.3s ease;
-}
-
-.todo-item-enter-active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.todo-item-exit {
-    opacity: 1;
-    transform: translateY(0);
-    transition: all 0.3s ease;
-}
-
-.todo-item-exit-active {
-    opacity: 0;
-    transform: translateY(-10px);
-}
-
-/* Media query for GitHub corner on mobile */
-@media (max-width: 500px) {
-    .github-corner:hover .octo-arm {
-        animation: none;
-    }
-    .github-corner .octo-arm {
-        animation: octocat-wave 560ms ease-in-out;
-    }
+/* Input field glass effect */
+.input-glassy {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
 }
