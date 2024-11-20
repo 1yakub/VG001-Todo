@@ -1,0 +1,62 @@
+/* animations.css */
+
+/*************************************************
+ * ANIMATIONS
+ * All animation keyframes and transition effects
+ *************************************************/
+
+/* Gradient animation */
+.animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* GitHub Corner animations */
+.github-corner:hover .octo-arm {
+    animation: octocat-wave 560ms ease-in-out;
+}
+
+@keyframes octocat-wave {
+    0%, 100% { transform: rotate(0); }
+    20%, 60% { transform: rotate(-25deg); }
+    40%, 80% { transform: rotate(10deg); }
+}
+
+/* Todo item animations */
+.todo-item-enter {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.todo-item-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.todo-item-exit {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.3s ease;
+}
+
+.todo-item-exit-active {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+/* Media query for GitHub corner on mobile */
+@media (max-width: 500px) {
+    .github-corner:hover .octo-arm {
+        animation: none;
+    }
+    .github-corner .octo-arm {
+        animation: octocat-wave 560ms ease-in-out;
+    }
+}
