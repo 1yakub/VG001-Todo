@@ -3,274 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documented Todo List</title>
-    <!-- 
-        Tailwind CSS via CDN
-        Pros: Quick setup, no build process needed
-        Cons: Larger file size in production, no custom configuration
-        Alternative: Could use npm install tailwindcss for production
-    -->
+    <title>Modern Todo List</title>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <style>
-        /* 
-        ANIMATION STYLING
-        - Using keyframes for continuous background gradient movement
-        - 15s duration provides smooth, subtle movement
-        - ease timing function ensures smooth transitions
-        */
-        .animate-gradient {
-            background-size: 200% 200%;
-            animation: gradient 15s ease infinite;
-        }
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* 
-        GLASSMORPHISM EFFECTS
-        Three levels of glass effect for visual hierarchy:
-        1. Main container (glassy) - Most transparent
-        2. Interactive elements (glassy-dark) - Medium opacity
-        3. Input field (input-glassy) - Most opaque for readability
-        */
-        .glassy {
-            /* 25% white background for subtle transparency */
-            background: rgba(255, 255, 255, 0.25);
-            /* 12px blur creates the frosted glass effect */
-            backdrop-filter: blur(12px);
-            /* Subtle white border adds depth */
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            /* Layered shadow for depth perception */
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-        }
-
-        .glassy-dark {
-            /* Using blue tint for cohesive design */
-            background: rgba(59, 130, 246, 0.15);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-        }
-
-        .input-glassy {
-            /* Higher opacity background for better text contrast */
-            background: rgba(255, 255, 255, 0.4);
-            /* Less blur for distinction from other elements */
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-        
-        /* GitHub Corner styles */
-        .github-corner:hover .octo-arm {
-            /* Animate the octocat arm on hover */
-            animation: octocat-wave 560ms ease-in-out;
-        }
-        
-        /* Octocat arm waving animation */
-        @keyframes octocat-wave {
-            0%, 100% { transform: rotate(0); }       /* Start and end at 0 degrees rotation */
-            20%, 60% { transform: rotate(-25deg); }  /* Rotate to -25 degrees at 20% and 60% of the animation */
-            40%, 80% { transform: rotate(10deg); }   /* Rotate to 10 degrees at 40% and 80% of the animation */
-        }
-        
-        /* Media query for smaller screens */
-        @media (max-width: 500px) {
-            .github-corner:hover .octo-arm {
-            /* Disable the hover animation on smaller screens */
-            animation: none;
-            }
-            .github-corner .octo-arm {
-            /* Always animate the octocat arm on smaller screens */
-            animation: octocat-wave 560ms ease-in-out;
-            }
-        }
-    </style>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/glassy.css">
 </head>
 
-<!-- 
-BODY STRUCTURE
-- Flex container for vertical centering
-- Min-height ensures full viewport coverage
-- Animated gradient background for visual interest
-- Color scheme: Light blues for calm, professional appearance
--->
 <body class="flex flex-col items-center justify-center min-h-screen animate-gradient bg-gradient-to-br from-blue-300 via-blue-200 to-sky-200">
-
-    <!-- 
-    GITHUB CORNER
-    - Positioned absolutely in top-right
-    - SVG for crisp rendering at any size
-    - Interactive animation on hover
-    - Dynamic color updates
-    - Maintains aspect ratio
-    -->
-    <a href="https://github.com/1yakub/VG001-Todo" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub">
-        <svg width="80" height="80" viewBox="0 0 250 250" 
-                style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" 
-                aria-hidden="true" 
-                id="githubIcon">
-            <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-            <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" 
-                    fill="currentColor" 
-                    style="transform-origin: 130px 106px;" 
-                    class="octo-arm">
-            </path>
-            <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" 
-                    fill="currentColor" 
-                    class="octo-body">
-            </path>
-        </svg>
+    <!-- GitHub Corner -->
+    <a href="https://github.com/yourusername/VG001-Todo" class="github-corner" aria-label="View source on GitHub">
+        <!-- Your existing SVG code here -->
     </a>
 
-    <!-- 
-    MAIN CONTAINER
-    - Width: 96 (24rem) provides good readability
-    - Padding: 8 (2rem) for comfortable spacing
-    - Shadow and rounded corners for modern look
-    -->
-    <div class="glassy p-8 rounded-2xl shadow-2xl w-96 max-w-full mx-4">
-        <!-- 
-        HEADER
-        - text-4xl: Large, prominent title
-        - blue-800: Dark enough for contrast, matches theme 
-        -->
-        <h1 class="text-4xl font-bold mb-8 text-center text-blue-800">My Todo List</h1>
-
-        <!-- 
-        INPUT SECTION
-        - Flex container for input and button alignment
-        - Space-x-4 provides consistent spacing
-        -->
+    <!-- Main Container -->
+    <div class="todo-container glassy p-8 rounded-2xl shadow-2xl">
+        <h1 class="todo-title">My Todo List</h1>
+        
         <div class="flex space-x-4 mb-8">
-            <!-- 
-            INPUT FIELD
-            - flex-grow allows input to take available space
-            - Comprehensive focus states for accessibility
-            - Color-matched placeholder for design consistency
-            -->
             <input type="text" 
                 id="itemInput" 
                 placeholder="Add new task..." 
-                class="flex-grow px-4 py-3 input-glassy rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 
-                text-blue-900 placeholder-blue-400 text-lg shadow-inner">
-
-            <!-- 
-            ADD BUTTON
-            - Solid background for visual prominence
-            - Interactive states: hover, focus, active
-            - Scale effect on click for feedback
-            -->
-            <button onclick="addItem()" 
-                class="px-6 py-3 bg-blue-500 text-white font-semibold rounded-xl hover:bg-blue-600 
-                focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-300 
-                shadow-lg hover:shadow-xl active:scale-95">
+                class="input-field input-glassy rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400">
+            
+            <button onclick="addItem()" class="add-button">
                 Add
             </button>
         </div>
 
-        <!-- 
-        LIST CONTAINER
-        - Space-y-3 provides consistent vertical spacing between items
-        -->
-        <ul id="itemList" class="space-y-3"></ul>
+        <ul id="itemList" class="todo-list"></ul>
     </div>
 
-    <script>
-        /**
-         * Adds a new item to the todo list
-         * Includes:
-         * - Input validation
-         * - Element creation
-         * - Styling application
-         * - Animation handling
-         * - Event listener attachment
-         */
-        function addItem() {
-            // Get DOM elements
-            const input = document.getElementById('itemInput');
-            const list = document.getElementById('itemList');
-            
-            // Validate input (prevent empty items)
-            if (input.value.trim() !== '') {
-                // Create list item with styling
-                const li = document.createElement('li');
-                li.classList.add(
-                    'glassy-dark',
-                    'px-4',
-                    'py-3',
-                    'rounded-xl',
-                    'text-blue-800',
-                    'hover:bg-blue-100/50',
-                    'transition',
-                    'duration-300',
-                    'cursor-pointer',
-                    'shadow-md',
-                    'hover:shadow-lg',
-                    'text-lg',
-                    'font-medium'
-                );
-                
-                // Create container for flexible layout
-                const itemContent = document.createElement('div');
-                itemContent.className = 'flex justify-between items-center';
-                
-                // Create and style text content
-                const textSpan = document.createElement('span');
-                textSpan.textContent = input.value;
-                
-                // Create and configure delete button
-                const deleteBtn = document.createElement('button');
-                deleteBtn.innerHTML = '×'; // Using × symbol for delete
-                deleteBtn.className = 'ml-2 text-blue-600 hover:text-red-500 text-xl font-bold transition duration-300';
-                
-                // Add delete functionality with animation
-                deleteBtn.onclick = (e) => {
-                    e.stopPropagation(); // Prevent event bubbling
-                    // Apply exit animation
-                    li.classList.add('opacity-0', 'scale-95');
-                    // Remove after animation completes
-                    setTimeout(() => li.remove(), 300);
-                };
-                
-                // Assemble the item components
-                itemContent.appendChild(textSpan);
-                itemContent.appendChild(deleteBtn);
-                li.appendChild(itemContent);
-                
-                // Set up entrance animation initial state
-                li.style.opacity = '0';
-                li.style.transform = 'translateY(10px)';
-                
-                // Add to list (prepend for better UX)
-                list.insertBefore(li, list.firstChild);
-                
-                // Trigger entrance animation
-                setTimeout(() => {
-                    li.style.transition = 'all 0.3s ease';
-                    li.style.opacity = '1';
-                    li.style.transform = 'translateY(0)';
-                }, 50);
-                
-                // Reset input field
-                input.value = '';
-            }
-            
-            // Return focus to input for better UX
-            input.focus();
-        }
-        
-        /**
-         * Add keyboard support for better accessibility
-         * Allows users to submit using Enter key
-         */
-        document.getElementById('itemInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                addItem();
-            }
-        });
-    </script>
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
 </body>
 </html>
